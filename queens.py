@@ -35,8 +35,11 @@ def solveQueenRecursive(board, col, N):
         if fits(board, i, col, N): 
               
             board[i][col] = 1
-  
-            if solveQueenRecursive(board, col + 1, N) == True: 
+            
+            printSol(board, N)
+            print("\n")
+     
+            if solveQueenRecursive(board, col + 1, N): 
                 return True
   
             board[i][col] = 0
@@ -57,15 +60,11 @@ def solveQueen():
         for j in range(N):
             board[i].append(0)
 
-    if solveQueenRecursive(board, 0, N) == False: 
+    if not solveQueenRecursive(board, 0, N): 
         print ("Solution does not exist") 
         return False
   
     printSol(board, N) 
     return True
-    
-
-
-
   
 solveQueen() 
