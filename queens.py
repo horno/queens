@@ -30,7 +30,7 @@ def fits(board, row, col, N):
 def solveQueenRecursive(board, col, N, it): 
       
     if col >= N: 
-        return True
+        return True, 0
   
     for i in range(N): 
   
@@ -38,8 +38,10 @@ def solveQueenRecursive(board, col, N, it):
               
             board[i][col] = 1
             
-            if solveQueenRecursive(board, col + 1, N, it + 1): 
-                return True
+            
+
+            if solveQueenRecursive(board, col + 1, N, it + 1)[0]: 
+                return True, 0
   
             board[i][col] = 0
     print(it) 
@@ -48,7 +50,7 @@ def solveQueenRecursive(board, col, N, it):
     printSol(board, N)
     print("\n")
     
-    return False
+    return False, 0
   
 def solveQueen(): 
     
@@ -64,7 +66,7 @@ def solveQueen():
         for j in range(N):
             board[i].append(0)
 
-    if not solveQueenRecursive(board, 0, N, 0): 
+    if not solveQueenRecursive(board, 0, N, 0)[0]: 
         print ("Solution does not exist") 
         return False
   
