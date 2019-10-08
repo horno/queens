@@ -2,6 +2,9 @@
 
 import sys
 import subprocess
+
+
+n_sol = 0 
   
 def printSol(board, N): 
     for i in range(N): 
@@ -29,8 +32,7 @@ def fits(board, row, col, N):
   
     return True
   
-def solveQueenRecursive(board, col, N, it): 
-      
+def solveQueenRecursive(board, col, N): 
     if col >= N: 
         return True
   
@@ -42,9 +44,12 @@ def solveQueenRecursive(board, col, N, it):
             
             
 
-            if solveQueenRecursive(board, col + 1, N, it + 1): 
-                return True
-  
+            if solveQueenRecursive(board, col + 1, N): 
+                global n_sol
+                n_sol += 1
+                print(n_sol)
+                printSol(board, N)
+                print("\n") 
             board[i][col] = 0
     '''print(it) 
    # if it%1 == 0:
@@ -52,8 +57,6 @@ def solveQueenRecursive(board, col, N, it):
     printSol(board, N)
     print("\n")'''
     
-    return False 
-  
 def solveQueen(): 
     
     if len(sys.argv) != 2:
@@ -68,11 +71,12 @@ def solveQueen():
         for j in range(N):
             board[i].append(0)
 
-    if not solveQueenRecursive(board, 0, N, 0): 
-        print ("Solution does not exist") 
-        return False
-  
-    printSol(board, N) 
-    return True
-  
+    solveQueenRecursive(board, 0, N) 
+    if n_sol == 0:
+        print("There are no solutions")
+    else:
+        print("Solutions:", n_sol)
+
+
+
 solveQueen() 
