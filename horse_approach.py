@@ -77,8 +77,8 @@ def main():
         while state.move_along():
             state.print_state()
         print("Achieved = " + str(state.queens_placed()))
-        '''if state.queens_placed() == N:
-            break'''
+        if state.queens_placed() == N:
+            break
 
 
 if __name__ == '__main__':
