@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 import sys
 
-'''
-    The problem of the knight moves is solved using the method available_position. I think it is
-    the best way doing it here and not in the knight_moves method.
-    We must taking care that different hamiltonian cycles could get the same solution.
-'''
-
 class State:
 
     def __init__(self, N, initial_y_queen):
@@ -19,14 +13,9 @@ class State:
         self.position((0, y))
 
     def knight_moves(self, pos):
-        '''moves = [((pos[0]+2)%self.N,(pos[1]+1)%self.N),((pos[0]+2)%self.N,(pos[1]-1)%self.N),
-                ((pos[0]-2)%self.N,(pos[1]+1)%self.N),((pos[0]-2)%self.N,(pos[1]-1)%self.N),
-                ((pos[0]+1)%self.N,(pos[1]+2)%self.N),((pos[0]+1)%self.N,(pos[1]-2)%self.N),
-                ((pos[0]-1)%self.N,(pos[1]+2)%self.N),((pos[0]-1)%self.N,(pos[1]-2)%self.N)] 
-        '''
-        move = lambda point, mov: ((point[0] + mov[0]) % self.N, (point[1] + mov[1]) % self.N)
         # mov = lambda ops: lambda point: ((point[0] + ops[0](1)) % self.N, (point[1] + ops[1](2)) % self.N)
         # res = list(map(lambda x: x((1, 2)), map(mov, ops)))
+        move = lambda point, mov: ((point[0] + mov[0]) % self.N, (point[1] + mov[1]) % self.N)
         opers = lambda x: abs(x), lambda x: -abs(x)
         ops = [(i, j) for i in opers for j in opers]
         res = [move(pos, (op1(1), op2(2))) for op1, op2 in ops] + [move(pos, (op1(2), op2(1))) for op1, op2 in ops]
