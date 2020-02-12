@@ -71,6 +71,7 @@ def main():
         print(" Use:\n\tpython3 horse_approach.py N_of_NxN_table")
         sys.exit()
     N = int(sys.argv[1])
+    num_solutions = 0
 
     for i in range(N):
         state = State(N, i)
@@ -78,7 +79,8 @@ def main():
             state.print_state()
         print("Achieved = " + str(state.queens_placed()))
         if state.queens_placed() == N:
-            break
+            num_solutions += 1
+    print("Num of solutions: %i" % num_solutions)
 
 
 if __name__ == '__main__':
