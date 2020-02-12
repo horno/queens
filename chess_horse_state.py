@@ -25,7 +25,7 @@ class HorseState:
 
     def moves(self):
         last_position = (self.__last_queen, self.__queens[self.__last_queen])
-        return knight_moves(last_position, self.__N)
+        return self.available_moves(knight_moves(last_position, self.__N))
 
     def move_to(self, new_position):
         x, y = new_position
@@ -58,6 +58,15 @@ class HorseState:
                 sys.stdout.write("---+")
             sys.stdout.write("\n")
 
+    def available_moves(self, moves):
+        if self.__N == len(self.__queens):
+            return []
+        res = []
+        for move in moves:
+            if move[0] not in self.__queens.keys() and move[1] not in self.__queens.values():
+                res.append(move)
+        return res
+
 
 def knight_moves(pos, N):
     move = lambda point, mov: ((point[0] + mov[0]) % N, (point[1] + mov[1]) % N)
@@ -70,12 +79,14 @@ def knight_moves(pos, N):
 def main():
     state = HorseState(4, 0)
     print(state.moves())
-    state.print()
-    for move in state.moves():
-        print()
-        new_state = state.move_to(move)
-        print(new_state.get_last_queen())
-        new_state.print()
+    stack = [state]
+    while len(stack) != 0:
+        current = stack.pop()
+        moves = current.moves()
+        for move in moves:
+            stack.append(current.move_to(move))
+        if len(moves) == 0:
+            current.print()
 
 
 if __name__ == '__main__':
