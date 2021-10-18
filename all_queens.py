@@ -51,11 +51,11 @@ def solveQueenRecursive(board, col, N):
                 printSol(board, N)
                 print("\n") 
             board[i][col] = 0
-    '''print(it) 
+    print(it) 
    # if it%1 == 0:
     subprocess.call("./subprocess.sh")            
     printSol(board, N)
-    print("\n")'''
+    print("\n")
     
 def solveQueen(): 
     
